@@ -1,0 +1,23 @@
+{% extends 'bank/base.html' %}
+
+{% block middle_area %}
+    <h1>Welcome</h1>
+    <p>
+        Banking application is enterprise software that is used by the banking
+        industry. Typically banking software refers to Core Banking Software
+        and its interfaces that allows commercial banks to connect to
+        other modular software and to the interbank networks.
+        It can also refer to the trading software used by investment banks
+        to access capital markets.
+    </p>
+    <hr>
+    <h3></h3>
+    <p></p>
+{% endblock middle_area %}
+
+{% block log_out %}
+    {% if user.is_authenticated %}
+        <li><a href=""><span class="glyphicon glyphicon-user"></span> {{ user }}</a></li>
+        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphic on-log-in"></span> LOGOUT</a></li>
+    {% endif %}
+{% endblock log_out %}

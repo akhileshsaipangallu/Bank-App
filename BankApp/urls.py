@@ -17,10 +17,14 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.conf.urls import include
 from django.conf.urls import url
+from BankApp import views
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+
+    url(r'^$', views.home_page, name='home_page'),
+
     url(
         r'^accounts/login/$', auth_views.login,
         {
@@ -28,5 +32,6 @@ urlpatterns = [
         },
         name='login',
     ),
+
     url(r'^bank/', include('bank.urls')),
 ]

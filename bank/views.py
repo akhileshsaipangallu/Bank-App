@@ -23,12 +23,6 @@ def logout_view(request):
 
 
 @login_required
-def about(request):
-    context = {'user': request.user}
-    return render(request, 'bank/about.html', context)
-
-
-@login_required
 def register(request):
     form = RegistrationForm()
 

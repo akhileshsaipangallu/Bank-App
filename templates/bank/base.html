@@ -55,12 +55,11 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="{% url 'bank_list' %}">BANKING APPLICATION</a>
+                        <a class="navbar-brand" href="{% url 'home_page' %}">BANKING APPLICATION</a>
                     </div>
                     <div class="collapse navbar-collapse" id="myNavbar">
                         <ul class="nav navbar-nav">
                             <li class=""><a href="{% url 'bank_list' %}">HOME</a></li>
-                            <li><a href="{% url 'about' %}">ABOUT</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             {% block log_out %}

@@ -4,19 +4,22 @@ from . import views
 
 urlpatterns = [
     url(r'^logout/$', views.logout_view, name='logout'),
-    url(r'^about/$', views.about, name='about'),
+
     url(
         r'^register/$',
         views.register,
         name='register',
     ),
     url(r'^$', views.bank_list, name='bank_list'),
+
     url(r'^add/$', views.bank_add, name='bank_add'),
+
     url(
         r'^(?P<ifsc>\w+)/$',
         views.bank_details,
         name='bank_details'
     ),
+
     url(
         r'^(?P<ifsc>\w+)/delete/$',
         views.bank_delete,
