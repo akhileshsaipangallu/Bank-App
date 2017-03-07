@@ -6,38 +6,36 @@
     <div class="col-sm-8 col-sm-offset-2">
         <div class="row">
             {% if empty %}
-                <div class="h1 col-sm-offset-2 row"><h1>No Transactions in List</h1></div>
+                <h1>No Transactions in List</h1>
             {% else %}
-                <div class="h1 col-sm-offset-2 row"><h1>{{ first_name }} {{ last_name }}</h1></div>
-                    <table class="table table-condensed">
-                        <thead>
+                <h1>{{ first_name }} {{ last_name }}</h1>
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Transaction Type</th>
+                            <th>Amount</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    {% for obj in transaction_obj %}
+                        <tbody>
                             <tr>
-                                <th>Transaction Type</th>
-                                <th>Amount</th>
-                                <th>Time</th>
+                                <td>{{ obj.transaction_type }}</td>
+                                <td>{{ obj.amount }}</td>
+                                <td>{{ obj.timestamp }}</td>
                             </tr>
-                        </thead>
-                        {% for obj in transaction_obj %}
-                            <tbody>
-                                <tr>
-                                    <td>{{ obj.transaction_type }}</td>
-                                    <td>{{ obj.amount }}</td>
-                                    <td>{{ obj.timestamp }}</td>
-                                </tr>
-                            </tbody>
-                        {% endfor %}
-                    </table>
-                </div>
+                        </tbody>
+                    {% endfor %}
+                </table>
             {% endif %}
+        </div>
     </div>
 {% endblock middle_area %}
 
 {% block right_side %}
-    <div>
-        <p><a href="{% url 'transaction_add' ifsc first_name last_name id account_number %}"><button type="button" class="btn btn-success">Add Transaction</button></a></p>
-        {% if user.is_superuser %}
-            <p><a href="{% url 'account_delete' ifsc first_name last_name id account_number %}"><button type="button" class="btn btn-success">Delete Account</button></a></p>
-        {% endif %}
-        <p><a href="{% url 'account_list' ifsc first_name last_name id %}"><button type="button" class="btn btn-success">Back</button></a></p>
-    </div>
+    <p><a href="{% url 'transaction_add' ifsc first_name last_name id account_number %}"><button type="button" class="btn btn-success">Add Transaction</button></a></p>
+    {% if user.is_superuser %}
+        <p><a href="{% url 'account_delete' ifsc first_name last_name id account_number %}"><button type="button" class="btn btn-success">Delete Account</button></a></p>
+    {% endif %}
+    <p><a href="{% url 'account_list' ifsc first_name last_name id %}"><button type="button" class="btn btn-success">Back</button></a></p>
 {% endblock right_side %}

@@ -6,9 +6,9 @@
     <div class="col-sm-8 col-sm-offset-2">
         <div class="row">
             {% if empty %}
-                <div class="h1 col-sm-offset-2 row"><h1>No Accounts in List</h1></div>
+                <h1>No Accounts in List</h1>
             {% else %}
-                <div class="h1 col-sm-offset-2 row"><h1>{{ account_obj_one.customer }}</h1></div>
+                <h1>{{ account_obj_one.customer }}</h1>
                 <table class="table table-condensed">
                     <thead>
                         <tr>
@@ -25,17 +25,14 @@
                                 <td><a href="{% url 'transaction_list' ifsc first_name last_name id obj.account_number %}">{{ obj.balance }}</a></td>
                             </tr>
                         </tbody>
-                        {% cycle '' '<div class="col-sm-12"></div></div><div class="row">' %}
                     {% endfor %}
                 </table>
-            </div>
-        {% endif %}
+            {% endif %}
+        </div>
     </div>
 {% endblock middle_area %}
 
 {% block right_side %}
-    <div>
-        <p><a href="{% url 'account_add' ifsc first_name last_name id %}"><button type="button" class="btn btn-success">Add Account</button></a></p>
-        <p><a href="{% url 'customer_details' ifsc first_name last_name id %}"><button type="button" class="btn btn-success">Back</button></a></p>
-    </div>
+    <p><a href="{% url 'account_add' ifsc first_name last_name id %}"><button type="button" class="btn btn-success">Add Account</button></a></p>
+    <p><a href="{% url 'customer_details' ifsc first_name last_name id %}"><button type="button" class="btn btn-success">Back</button></a></p>
 {% endblock right_side %}
