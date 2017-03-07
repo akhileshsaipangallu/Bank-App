@@ -1,0 +1,41 @@
+{% extends 'bank/base.html' %}
+
+{% block head_title %}Account List | {{ account_obj_one.customer }}{% endblock head_title %}
+
+{% block middle_area %}
+    <div class="col-sm-8 col-sm-offset-2">
+        <div class="row">
+            {% if empty %}
+                <div class="h1 col-sm-offset-2 row"><h1>No Accounts in List</h1></div>
+            {% else %}
+                <div class="h1 col-sm-offset-2 row"><h1>{{ account_obj_one.customer }}</h1></div>
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Account Number</th>
+                            <th>Account Type</th>
+                            <th>Balance</th>
+                        </tr>
+                    </thead>
+                    {% for obj in account_obj %}
+                        <tbody>
+                            <tr>
+                                <td><a href="{% url 'transaction_list' ifsc first_name last_name id obj.account_number %}">{{ obj.account_number }}</a></td>
+                                <td><a href="{% url 'transaction_list' ifsc first_name last_name id obj.account_number %}">{{ obj.account_type }}</a></td>
+                                <td><a href="{% url 'transaction_list' ifsc first_name last_name id obj.account_number %}">{{ obj.balance }}</a></td>
+                            </tr>
+                        </tbody>
+                        {% cycle '' '<div class="col-sm-12"></div></div><div class="row">' %}
+                    {% endfor %}
+                </table>
+            </div>
+        {% endif %}
+    </div>
+{% endblock middle_area %}
+
+{% block right_side %}
+    <div>
+        <p><a href="{% url 'account_add' ifsc first_name last_name id %}"><button type="button" class="btn btn-success">Add Account</button></a></p>
+        <p><a href="{% url 'customer_details' ifsc first_name last_name id %}"><button type="button" class="btn btn-success">Back</button></a></p>
+    </div>
+{% endblock right_side %}

@@ -1,0 +1,32 @@
+{% extends 'bank/base.html' %}
+
+{% block head_title %}{{ customer_obj.first_name }} {{ customer_obj.last_name }}{% endblock head_title %}
+
+{% block middle_area %}
+    <div class="col-sm-8 col-sm-offset-2">
+        <div><h1>{{ customer_obj.first_name }} {{ customer_obj.last_name }}</h1></div>
+        <div class="col-sm-4">
+            <p>Bank</p>
+            <p>City</p>
+            <p>State</p>
+            <p>Zip Code</p>
+        </div>
+        <div class="col-sm-4">
+            <p>: {{ customer_obj.bank }}</p>
+            <p>: {{ customer_obj.city }}</p>
+            <p>: {{ customer_obj.state }}</p>
+            <p>: {{ customer_obj.zip_code }}</p>
+        </div>
+    </div>
+{% endblock middle_area %}
+
+{% block right_side %}
+    <div>
+        <p><a href="{% url 'account_list' ifsc first_name last_name id %}"><button type="button" class="btn btn-success">Account List</button></a></p>
+        {% if user.is_superuser %}
+            <p><a href="{% url 'customer_delete' ifsc first_name last_name id %}"><button type="button" class="btn btn-success">Delete Customer</button></a></p>
+        {% endif %}
+        <p><a href="{% url 'bank_list' %}"><button type="button" class="btn btn-success">Back</button></a></p>
+    </div>
+{% endblock right_side %}
+

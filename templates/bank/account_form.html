@@ -1,0 +1,36 @@
+{% extends 'bank/base.html' %}
+
+{% block head_title %}New Account{% endblock head_title %}
+
+{% block style %}
+    .btn{
+        width: auto;
+        border-radius: 0px
+    }
+{% endblock style %}
+
+{% block middle_area %}
+<div class="col-sm-6 col-sm-offset-3">
+    <center><h2 style="margin-bottom: 30px">New Account</h2></center>
+    <form role="form" class="form-horizontal" action="" method="POST">
+        <div class="form_group">
+            {% csrf_token %}
+            {% for field in account_form %}
+            <div class="row" style="margin-top: 10px">
+                <label class="control-label col-sm-5">{{ field.label }} :</label>
+                <div class="col-sm-7">
+                    {{ field }}
+                </div>
+                <div class="row">
+                    <p class="help-text">{{ field.help_text }}</p>
+                </div>
+            <div class="row"></div>
+            </div>
+            {% endfor %}
+            <div class="col-sm-offset-6 col-sm-10">
+                <button style="margin-top: 10px" type="submit" class="btn btn-success">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock middle_area %}

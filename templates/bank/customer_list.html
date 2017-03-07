@@ -1,0 +1,35 @@
+{% extends 'bank/base.html' %}
+
+{% block head_title %}Customer List | {{ bank_one.bank.name }}{% endblock head_title %}
+
+{% block middle_area %}
+    <div class="col-sm-8 col-sm-offset-2">
+        <div class="row">
+            {% if empty %}
+                <div class="col-sm-8 text-left"><h2>No Customers in List</h2></div>
+            {% else %}
+                <div class="col-sm-8 text-left"><h1>{{ bank_one.bank.name }}</h1></div>
+                    {% for obj in customer_obj %}
+                        <div class="col-sm-12">
+                            <div class="thumbnail">
+                                <div class="caption">
+                                    <h3><a href="{{ obj.get_absolute_url }}">{{ obj.first_name }} {{ obj.last_name }}</a></h3>
+                                    <small>{{ obj.city }}, {{ obj.state }}, {{ obj.zip_code }}</small><br>
+                                </div>
+                            </div>
+                        </div>
+                    {% cycle '' '<div class="col-sm-12"></div></div><div class="row">' %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+    </div>
+{% endblock middle_area %}
+
+{% block right_side %}
+    <div>
+        <p><a href="{% url 'customer_add' ifsc %}"><button type="button" class="btn btn-success">Add Customer</button></a></p>
+    </div>
+    <div>
+        <p><a href="{% url 'bank_details' ifsc %}"><button type="button" class="btn btn-success">Back</button></a></p>
+    </div>
+{% endblock right_side %}

@@ -1,0 +1,38 @@
+{% extends 'bank/base.html' %}
+
+{% block head_title %}{{ bank_obj.name }}{% endblock head_title %}
+
+{% block middle_area %}
+    {% if empty %}
+        <div class="col-sm-8 col-sm-offset-2">
+            <span>No Bank Details in List</span>
+        </div>
+    {% else %}
+        <div class="col-sm-8 col-sm-offset-2">
+            <div><h1>{{ bank_obj.name }}</h1></div>
+            <div class="col-sm-4">
+                <p>IFSC</p>
+                <p>Branch</p>
+                <p>City</p>
+                <p>State</p>
+            </div>
+            <div class="col-sm-4">
+                <p>: {{ bank_obj.ifsc }}</p>
+                <p>: {{ bank_obj.branch }}</p>
+                <p>: {{ bank_obj.city }}</p>
+                <p>: {{ bank_obj.state }}</p>
+            </div>
+        </div>
+    {% endif %}
+{% endblock middle_area %}
+
+{% block right_side %}
+    <div>
+        <p><a href="{% url 'customer_list' ifsc %}"><button type="button" class="btn btn-success">Customer List</button></a></p>
+        <p><a href="{% url 'customer_add' ifsc %}"><button type="button" class="btn btn-success">Add Customer</button></a></p>
+        {% if user.is_superuser %}
+            <p><a href="{% url 'bank_delete' ifsc %}"><button type="button" class="btn btn-success">Delete Bank</button></a></p>
+        {% endif %}
+        <p><a href="{% url 'bank_list' %}"><button type="button" class="btn btn-success">Back</button></a></p>
+    </div>
+{% endblock right_side %}

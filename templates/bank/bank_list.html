@@ -1,0 +1,35 @@
+{% extends 'bank/base.html' %}
+
+{% block head_title %}Bank List{% endblock head_title %}
+
+{% block middle_area %}
+    <div class="col-sm-8 col-sm-offset-2">
+        <div class="row">
+            {% if empty %}
+                <div class="col-sm-8 text-left"><h1>No Banks in List</h1></div>
+            {% else %}
+                <div class="col-sm-8 text-left"><h1>Banks</h1></div>
+                    {% for obj in bank_obj %}
+                        <div class="col-sm-12">
+                            <div class="thumbnail">
+                                <div class="caption">
+                                    <h3><a href="{{ obj.get_absolute_url }}">{{ obj.name }}</a></h3>
+                                    <small>{{ obj.branch }} {{ obj.ifsc }}</small><br>
+                                </div>
+                            </div>
+                        </div>
+                    {% cycle '' '<div class="col-sm-12"></div></div><div class="row">' %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+    </div>
+{% endblock middle_area %}
+
+{% block right_side %}
+    <div>
+        {% if user.is_superuser %}
+            <p><a href="{% url 'register' %}"><button type="button" class="btn btn-success">Register</button></a></p>
+        {% endif %}
+        <p><a href="{% url 'bank_add' %}"><button type="button" class="btn btn-success">Add Bank</button></a></p>
+    </div>
+{% endblock right_side %}
