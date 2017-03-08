@@ -12,6 +12,16 @@
 
 
 {% block middle_area %}
+    {% for obj in bank_form %}
+        {% if obj.errors %}
+            <div class="alert alert-info">
+                <center>
+                    <strong>{{ obj.errors }}</strong>
+                </center>
+            </div>
+        {% endif %}
+    {% endfor %}
+
 <div class="col-sm-6 col-sm-offset-3">
     {% for obj in bank_form %}
         {% if obj.errors %}
