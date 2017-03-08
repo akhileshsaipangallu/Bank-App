@@ -3,7 +3,7 @@
 {% block head_title %}Account List | {{ account_obj_one.customer }}{% endblock head_title %}
 
 {% block middle_area %}
-    <div class="col-sm-8 col-sm-offset-2">
+    <div class="col-sm-10">
         <div class="row">
             {% if empty %}
                 <h1>No Accounts in List</h1>
@@ -20,9 +20,12 @@
                     {% for obj in account_obj %}
                         <tbody>
                             <tr>
-                                <td><a href="{% url 'transaction_list' ifsc first_name last_name id obj.account_number %}">{{ obj.account_number }}</a></td>
-                                <td><a href="{% url 'transaction_list' ifsc first_name last_name id obj.account_number %}">{{ obj.account_type }}</a></td>
-                                <td><a href="{% url 'transaction_list' ifsc first_name last_name id obj.account_number %}">{{ obj.balance }}</a></td>
+                                <td><a href="{% url 'transaction_list' ifsc first_name last_name id obj.account_number %}">
+                                    {{ obj.account_number }}</a></td>
+                                <td><a href="{% url 'transaction_list' ifsc first_name last_name id obj.account_number %}">
+                                    {{ obj.account_type }}</a></td>
+                                <td><a href="{% url 'transaction_list' ifsc first_name last_name id obj.account_number %}">
+                                    {{ obj.balance }}</a></td>
                             </tr>
                         </tbody>
                     {% endfor %}

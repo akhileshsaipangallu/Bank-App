@@ -3,15 +3,15 @@
 {% block head_title %}{{ customer_obj.first_name }} {{ customer_obj.last_name }}{% endblock head_title %}
 
 {% block middle_area %}
-    <div class="col-sm-8 col-sm-offset-2">
+    <div class="col-sm-10">
         <div><h1>{{ customer_obj.first_name }} {{ customer_obj.last_name }}</h1></div>
-        <div class="col-sm-4">
+        <div class="col-sm-2">
             <p>Bank</p>
             <p>City</p>
             <p>State</p>
             <p>Zip Code</p>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-10">
             <p>: {{ customer_obj.bank }}</p>
             <p>: {{ customer_obj.city }}</p>
             <p>: {{ customer_obj.state }}</p>

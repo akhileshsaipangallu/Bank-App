@@ -4,19 +4,17 @@
 
 {% block middle_area %}
     {% if empty %}
-        <div class="col-sm-8 col-sm-offset-2">
-            <span>No Bank Details in List</span>
-        </div>
+        <h1>No Bank Details in List</h1>
     {% else %}
-        <div class="col-sm-8 col-sm-offset-2">
+        <div class="col-sm-10">
             <div><h1>{{ bank_obj.name }}</h1></div>
-            <div class="col-sm-4">
+            <div class="col-sm-2">
                 <p>IFSC</p>
                 <p>Branch</p>
                 <p>City</p>
                 <p>State</p>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-10">
                 <p>: {{ bank_obj.ifsc }}</p>
                 <p>: {{ bank_obj.branch }}</p>
                 <p>: {{ bank_obj.city }}</p>
