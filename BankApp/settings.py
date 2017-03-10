@@ -26,13 +26,14 @@ SECRET_KEY = 'k5kv^(fux(ojj)&i#mr@=3=koc!u4cu@&d=-zpzms_ev2iik2v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'bank',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -124,3 +125,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # LOGIN_URL = '/login/'
 # LOGIN_REDIRECT_URL = '/user/profile/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
