@@ -37,6 +37,8 @@ def register(request):
             )
             user.save()
             return HttpResponseRedirect(reverse('bank_list'))
+        # else:
+        #     form = RegistrationForm(request.POST)
 
     context = {
         'form': form,

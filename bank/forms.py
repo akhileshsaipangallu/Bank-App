@@ -6,17 +6,45 @@ from .models import Transaction
 from django.contrib.auth.models import User
 
 
+def string_validation(data, field_name):
+    for char in data:
+        if not char.isalpha():
+            raise forms.ValidationError(
+                "Enter a valid %s name" % field_name
+            )
+
+
 class BankForm(forms.ModelForm):
 
     class Meta:
         model = Bank
         exclude = ['timestamp', 'updated']
 
+    def clean_name(self):
+        name = self.cleaned_data['name']
+        string_validation(name, 'Bank')
+        return name
+
+    def clean_branch(self):
+        branch = self.cleaned_data['branch']
+        string_validation(branch, 'Branch')
+        return branch
+
+    def clean_city(self):
+        city = self.cleaned_data['city']
+        string_validation(city, 'City')
+        return city
+
+    def clean_state(self):
+        state = self.cleaned_data['state']
+        string_validation(state, 'State')
+        return state
+
     def clean_ifsc(self):
-        data = self.cleaned_data['ifsc']
-        if Bank.objects.all().filter(ifsc=data):
-            raise forms.ValidationError("'%s' has already been taken" % data)
-        return data
+        ifsc = self.cleaned_data['ifsc']
+        if Bank.objects.filter(ifsc=ifsc):
+            raise forms.ValidationError("'%s' has already been taken" % ifsc)
+        return ifsc
 
     def __init__(self, user, *args, **kwargs):
         super(BankForm, self).__init__(*args, **kwargs)
@@ -35,6 +63,26 @@ class CustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
         exclude = ['timestamp', 'updated']
+
+    def clean_first_name(self):
+        first_name = self.cleaned_data['first_name']
+        string_validation(first_name, 'First')
+        return first_name
+
+    def clean_last_name(self):
+        last_name = self.cleaned_data['last_name']
+        string_validation(last_name, 'Last')
+        return last_name
+
+    def clean_city(self):
+        city = self.cleaned_data['city']
+        string_validation(city, 'City')
+        return city
+
+    def clean_state(self):
+        state = self.cleaned_data['state']
+        string_validation(state, 'State')
+        return state
 
     def __init__(self, user, *args, **kwargs):
         super(CustomerForm, self).__init__(*args, **kwargs)
@@ -57,6 +105,12 @@ class AccountForm(forms.ModelForm):
     class Meta:
         model = Account
         exclude = ['timestamp', 'updated']
+
+    def clean_balance(self):
+        balance = self.cleaned_data['balance']
+        if balance < 0:
+            raise forms.ValidationError('Balance cannot be -ve')
+        return balance
 
     def __init__(self, user, *args, **kwargs):
         super(AccountForm, self).__init__(*args, **kwargs)
@@ -102,11 +156,11 @@ class TransactionsForm(forms.ModelForm):
         transaction_type = self.cleaned_data['transaction_type']
 
         if data < 0:
-            raise forms.ValidationError('Amount can not be -ve . . .')
+            raise forms.ValidationError('Amount can not be -ve')
 
         elif transaction_type == 'Withdraw':
             if data > account_obj.balance:
-                raise forms.ValidationError('Oops, Balance low...')
+                raise forms.ValidationError('Oops, Balance low')
 
         return data
 
@@ -119,7 +173,7 @@ class RegistrationForm(forms.Form):
 
     def clean_username(self):
         data = self.cleaned_data['username']
-        if User.objects.all().filter(username=data):
+        if User.objects.filter(username=data):
             raise forms.ValidationError(
                 "Username '%s' has already been taken" % data
             )
