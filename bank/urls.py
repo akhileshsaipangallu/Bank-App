@@ -4,6 +4,11 @@ from . import views
 
 
 urlpatterns = [
+    url(
+        r'^get_auth_token/$',
+        views.obtain_auth_token,
+        name='get_auth_token'
+    ),
     url(r'^logout/$', views.logout_view, name='logout'),
     url(r'^api/', include('bank.api.urls')),
     url(

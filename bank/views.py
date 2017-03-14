@@ -11,9 +11,19 @@ from django.contrib.auth import logout
 from .forms import RegistrationForm
 from django.shortcuts import render
 from django.shortcuts import reverse
+from rest_framework.authtoken.models import Token
 from .models import Transaction
 from .forms import TransactionsForm
 from django.contrib.auth.models import User
+
+
+@login_required
+def obtain_auth_token(request):
+    auth_token = get_object_or_404(Token, user=request.user)
+    context = {
+        'auth_token': auth_token,
+    }
+    return render(request, 'bank/get_auth_token.html', context)
 
 
 @login_required

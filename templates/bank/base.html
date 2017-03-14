@@ -42,6 +42,22 @@
                 background-color: #0d0d0d;
                 color: #FFF;
             }
+            .dropdown-menu{
+                background-color: #5F5F5F;
+                color: #FFF;
+            }
+            .dropdown-menu>li>a {
+                color:#fff;
+            }
+            .navbar-default .navbar-nav>.open>a {
+                background-color: #000000 !important;
+
+            }
+            .navbar-default .navbar-nav>.open>a,
+            .navbar-default .navbar-nav>.open>a:focus,
+            .navbar-default .navbar-nav>.open>a:hover {
+                color: #FFF;
+            }
 
             {% block style %}
 
@@ -50,67 +66,76 @@
     </head>
     <body>
         {% block content %}
-        <nav class="navbar navbar-default navbar-border">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="{% url 'home_page' %}">BANKING APPLICATION</a>
-                </div>
-                <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav">
-                        <li class=""><a href="{% url 'bank_list' %}">HOME</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        {% block log_out %}
-                            <li><a href=""><span class="glyphicon glyphicon-user"></span> {{ user }}</a></li>
-                            <li><a href="{% url 'logout' %}"><span class="glyphicon glyphic on-log-in"></span> LOGOUT</a></li>
-                        {% endblock log_out %}
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div class="container">
-            <div class="container-fluid text-center">
-                <div class="row content">
-                    <div class="col-sm-2 sidenav">
-                        {% block left_side %}
-                            <!--<p><a href="#">Link1</a></p>-->
-                            <!--<p><a href="#">Link2</a></p>-->
-                            <!--<p><a href="#">Link3</a></p>-->
-                        {% endblock left_side %}
+            <nav class="navbar navbar-default navbar-border">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{% url 'home_page' %}">BANKING APPLICATION</a>
                     </div>
-                    <div class="col-sm-8 text-left">
-                        {% block middle_area %}
-                            <!--<h1>Welcome</h1>-->
-                            <!--<p>Paragraph</p>-->
-                            <!--<hr>-->
-                            <!--<h3>Test</h3>-->
-                            <!--<p>Lorem ipsum...</p>-->
-                        {% endblock middle_area %}
-                    </div>
-                    <div class="col-sm-2 sidenav class_font">
-                        {% block right_side %}
-                            <!--<div>-->
-                                <!--<p>ADS</p>-->
-                            <!--</div>-->
-                            <!--<div>-->
-                                <!--<p>ADS</p>-->
-                            <!--</div>-->
-                        {% endblock right_side %}
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        <ul class="nav navbar-nav">
+                            <li class=""><a href="{% url 'bank_list' %}">HOME</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            {% block log_out %}
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                        <span class="glyphicon glyphicon-user"></span>
+                                         {{ user }}
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{% url 'get_auth_token' %}"> API </a></li>
+                                        <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+                                    </ul>
+                                </li>
+                            {% endblock log_out %}
+                        </ul>
                     </div>
                 </div>
-            </div>
+            </nav>
+            <div class="container">
+                <div class="container-fluid text-center">
+                    <div class="row content">
+                        <div class="col-sm-2 sidenav">
+                            {% block left_side %}
+                                <!--<p><a href="#">Link1</a></p>-->
+                                <!--<p><a href="#">Link2</a></p>-->
+                                <!--<p><a href="#">Link3</a></p>-->
+                            {% endblock left_side %}
+                        </div>
+                        <div class="col-sm-8 text-left">
+                            {% block middle_area %}
+                                <!--<h1>Welcome</h1>-->
+                                <!--<p>Paragraph</p>-->
+                                <!--<hr>-->
+                                <!--<h3>Test</h3>-->
+                                <!--<p>Lorem ipsum...</p>-->
+                            {% endblock middle_area %}
+                        </div>
+                        <div class="col-sm-2 sidenav class_font">
+                            {% block right_side %}
+                                <!--<div>-->
+                                    <!--<p>ADS</p>-->
+                                <!--</div>-->
+                                <!--<div>-->
+                                    <!--<p>ADS</p>-->
+                                <!--</div>-->
+                            {% endblock right_side %}
+                        </div>
+                    </div>
+                </div>
 
-            <footer class="container-fluid">
-                {% block footer_area %}
-                    <!--<p>Footer Text</p>-->
-                {% endblock footer_area %}
-            </footer>
-        </div>
+                <footer class="container-fluid">
+                    {% block footer_area %}
+                        <!--<p>Footer Text</p>-->
+                    {% endblock footer_area %}
+                </footer>
+            </div>
         {% endblock %}
     </body>
 </html>

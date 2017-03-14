@@ -15,9 +15,20 @@
     <p></p>
 {% endblock middle_area %}
 
+
 {% block log_out %}
     {% if user.is_authenticated %}
-        <li><a href=""><span class="glyphicon glyphicon-user"></span> {{ user }}</a></li>
-        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphic on-log-in"></span> LOGOUT</a></li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <span class="glyphicon glyphicon-user"></span> {{ user }}
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu-edit dropdown-menu">
+                <li><a href="{% url 'get_auth_token' %}"> API </a></li>
+                <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+            </ul>
+        </li>
+    {% else %}
+        <li><a href="{% url 'bank_list' %}"><span class="glyphicon glyphicon-user"></span> LOGIN</a></li>
     {% endif %}
-{% endblock log_out %}
+{% endblock log_out %}.

@@ -44,7 +44,7 @@ class BankForm(forms.ModelForm):
         ifsc = self.cleaned_data['ifsc']
         if Bank.objects.filter(ifsc=ifsc):
             raise forms.ValidationError("'%s' has already been taken" % ifsc)
-        return ifsc
+        return ifsc.upper()
 
     def __init__(self, user, *args, **kwargs):
         super(BankForm, self).__init__(*args, **kwargs)
