@@ -1,8 +1,13 @@
+# third-party
 from rest_framework.decorators import APIView
-from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
-from bank.models import Bank
 import serializers
+
+# Django
+from django.shortcuts import get_object_or_404
+
+# local Django
+from bank.models import Bank
 
 
 class BankList(APIView):

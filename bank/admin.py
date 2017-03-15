@@ -1,4 +1,7 @@
+# Django
 from django.contrib import admin
+
+# local Django
 from .models import Account
 from .models import Bank
 from .models import Customer

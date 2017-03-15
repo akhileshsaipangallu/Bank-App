@@ -1,20 +1,25 @@
+# third-party
+from rest_framework.authtoken.models import Token
+
+# Django
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+from django.shortcuts import render
+from django.shortcuts import reverse
+from django.contrib.auth.models import User
+
+# local Django
 from .models import Account
 from .forms import AccountForm
 from .models import Bank
 from .forms import BankForm
 from .models import Customer
 from .forms import CustomerForm
-from django.shortcuts import get_object_or_404
-from django.http import HttpResponseRedirect
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
 from .forms import RegistrationForm
-from django.shortcuts import render
-from django.shortcuts import reverse
-from rest_framework.authtoken.models import Token
 from .models import Transaction
 from .forms import TransactionsForm
-from django.contrib.auth.models import User
 
 
 @login_required
@@ -47,8 +52,6 @@ def register(request):
             )
             user.save()
             return HttpResponseRedirect(reverse('bank_list'))
-        # else:
-        #     form = RegistrationForm(request.POST)
 
     context = {
         'form': form,

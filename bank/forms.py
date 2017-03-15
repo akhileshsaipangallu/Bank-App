@@ -1,9 +1,12 @@
+# Django
+from django import forms
+from django.contrib.auth.models import User
+
+# local Django
 from .models import Account
 from .models import Bank
 from .models import Customer
-from django import forms
 from .models import Transaction
-from django.contrib.auth.models import User
 
 
 def string_validation(data, field_name):
